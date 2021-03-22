@@ -60,8 +60,10 @@ class AgendaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-
+        
             if ($form->isValid()) {
+
+                
 
                 $image = $form->get('image')->getData();
                 if ($image != null) {
@@ -76,11 +78,16 @@ class AgendaController extends AbstractController
                     $agenda->setImage($fichier);
                 }
 
+                /*date*/
+                //format un peut special a cause de widget => single_text dans agendaType
+                $date = $request->request->get('agenda')['date'];
+                $date = explode('T', $date);
+
                 $agenda->setDescription($form->get('description')->getData())
                     ->setTitre($form->get('titre')->getData())
                     ->setSlug(strtolower($slugger->slug($agenda->getTitre())))
                     ->setUser($user)
-                    ->setDate(new \DateTime('now'))
+                    ->setDate(new \DateTime($date[0] . ' ' . $date[1]))
                     ->setCreatedAt(new \DateTime('now'));
 
 
@@ -92,7 +99,6 @@ class AgendaController extends AbstractController
             }
 
             $this->addFlash('warning', 'saisie invalide');
-            return $this->redirectToRoute('admin_index');
         }
 
         return $this->render('agenda/create.html.twig', [
@@ -144,11 +150,16 @@ class AgendaController extends AbstractController
                     $agenda->setImage($fichier);
                 }
 
+                /*date*/
+                //format un peut special a cause de widget => single_text dans agendaType
+                $date = $request->request->get('agenda')['date'];
+                $date = explode('T', $date);
+
                 $agenda->setDescription($form->get('description')->getData())
                     ->setTitre($form->get('titre')->getData())
-                    ->setSlug(strtolower($slugger->slug($agenda->getTitre())));
+                    ->setSlug(strtolower($slugger->slug($agenda->getTitre())))
+                    ->setDate(new \DateTime($date[0] . ' ' . $date[1]));
                     
-
                 $em->persist($agenda);
                 $em->flush();
 
@@ -157,7 +168,6 @@ class AgendaController extends AbstractController
             }
 
             $this->addFlash('warning','saisie invalide');
-            return $this->redirectToRoute('admin_index');
         }
 
         return $this->render('agenda/edit.html.twig', [
