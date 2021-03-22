@@ -33,4 +33,36 @@
         </div>
     </div>
     {% endif %}
+    {% if agenda.agendaComments %}
+        <div class="row mt-2">
+            <div class="col-12 col-md-6">
+                <h3>Les commentaires</h3>
+            </div>
+            <div class="col-12 col-md-6">
+                {% if app.user %}
+                    <a href="{{path('agenda_comment_create',{id : agenda.id})}}">Ajouter un commentaire</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class='row my-2'>
+            {% for comment in agenda.agendaComments %}
+                <div class='col-12'>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{comment.user.pseudo}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Publié le {{comment.createdAt | date('d-m-Y')}} à {{comment.createdAt | date('H:i')}}
+                            </h6>
+                            <p class="card-text">{{comment.commentaire | raw}}</p>
+                            {% if app.user == comment.user %}
+                                <a href="{{path('comment_edit', {id: comment.id})}}" class="card-link">modifier</a>
+                                <a href="{{path('comment_delete', {id: comment.id})}}" class="card-link">supprimer</a>
+                            {% endif %}
+                            
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
 {% endblock %}
