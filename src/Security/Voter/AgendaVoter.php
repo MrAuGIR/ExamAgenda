@@ -47,7 +47,7 @@ class AgendaVoter extends Voter
 
         //si on est là, c'est que $subject est un objet Agenda
         /** @var Agenda $agenda */
-        $comment = $subject;
+        $agenda = $subject;
 
         switch ($attribute) {
             case self::VIEW:

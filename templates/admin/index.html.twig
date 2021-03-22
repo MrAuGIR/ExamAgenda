@@ -4,9 +4,11 @@
 
 {% block body %}
     <div class='row my-5'>
+        {% if app.user %}
         <div class='col-12'>
             <h1>Bienvenue {{app.user.pseudo}} sur votre espace personnel</h1>
         </div>
+        {% endif %}
     </div>
     <div class='row'>
         <div class='col-12 d-flex justify-content-center'>

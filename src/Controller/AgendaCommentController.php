@@ -11,19 +11,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+
+/**
+ * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_EDITEUR')")
+ */
 class AgendaCommentController extends AbstractController
 {
-    /**
-     * @Route("/agenda/comment", name="agenda_comment")
-     */
-    public function index(): Response
-    {
-        return $this->render('agenda_comment/index.html.twig', [
-            'controller_name' => 'AgendaCommentController',
-        ]);
-    }
-
+   
     /**
      * @Route("/agenda/{id}/comment/create", name="agenda_comment_create")
      */

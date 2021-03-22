@@ -40,7 +40,7 @@ class AgendaController extends AbstractController
     }
 
     /**
-     * IsGranted("ROLE_EDITEUR")
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_EDITEUR')")
      * @Route("/agenda/createNewAgenda", name="agenda_create")
      */
     public function create(Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
@@ -107,7 +107,7 @@ class AgendaController extends AbstractController
     }
 
     /**
-     * IsGranted("ROLE_EDITEUR")
+     * @IsGranted("ROLE_EDITEUR")
      * @Route("/agenda/edit/{id}", name="agenda_edit")
      */
     public function edit(Agenda $agenda, Request $request, EntityManagerInterface $em, SluggerInterface $slugger):Response
@@ -178,7 +178,7 @@ class AgendaController extends AbstractController
     }
 
     /**
-     * IsGranted("ROLE_EDITEUR")
+     * @IsGranted("ROLE_EDITEUR")
      * @Route("/agenda/delete/{id}", name="agenda_delete")
      */
     public function delete(Agenda $agenda, EntityManagerInterface $em, SluggerInterface $slugger): Response
