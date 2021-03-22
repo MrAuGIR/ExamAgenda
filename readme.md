@@ -12,6 +12,10 @@
 
 4. `` php bin/console doctrine:fixtures:load ``
 
+5. `` yarn install ``
+
+6. `` yarn encore dev ``
+
 5. l'administrateur login: 'admin@gmail.com' et mp: 'admin'
 6. les editeurs login leur email et mp: 'password'
 7. ou crée un nouvel utilisateur
