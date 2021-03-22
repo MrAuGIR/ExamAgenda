@@ -32,8 +32,8 @@
                     <h5>{{agenda.titre}}</h5>
                 </div>
                 <div class="card-office-action">
-                    <a class="btn btn-secondary" href="{{path('agenda_edit',{slug : agenda.slug})}}">Editer</a>
-                    <a class="btn btn-secondary" href="{{path('agenda_delete',{slug : agenda.slug})}}">Supprimer</a>
+                    <a class="btn btn-secondary" href="{{path('agenda_edit',{id : agenda.id})}}">Editer</a>
+                    <a class="btn btn-secondary" href="{{path('agenda_delete',{id : agenda.id})}}">Supprimer</a>
                 </div>
             </div>
         {% endfor %}

@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class AgendaCommentVoter extends Voter
+class AgendaVoter extends Voter
 {
     const VIEW = "view";
     const EDIT = "edit";
@@ -27,8 +27,8 @@ class AgendaCommentVoter extends Voter
     {
 
         //Si l'attribut fait partie de ceux supportés et 
-        //on vote seulement avec un objet de class AgendaComment
-        return \in_array($attributes, [self::VIEW, self::EDIT, self::CREATE, self::DELETE]) && ($subject instanceof AgendaComment);
+        //on vote seulement avec un objet de class Agenda
+        return \in_array($attributes, [self::VIEW, self::EDIT, self::CREATE, self::DELETE]) && ($subject instanceof Agenda);
     }
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token)
@@ -45,8 +45,8 @@ class AgendaCommentVoter extends Voter
             return true;
         }
 
-        //si on est là, c'est que $subject est un objet AgendaComment
-        /** @var AgendaComment $comment */
+        //si on est là, c'est que $subject est un objet Agenda
+        /** @var Agenda $agenda */
         $comment = $subject;
 
         switch ($attribute) {
@@ -55,9 +55,9 @@ class AgendaCommentVoter extends Voter
             case self::CREATE:
                 return true;
             case self::EDIT:
-                return $comment->getUser() == $user;
+                return $agenda->getUser() == $user;
             case self::DELETE:
-                return $comment->getUser() == $user;
+                return $agenda->getUser() == $user;
         }
 
         //retour false si l'utilisateur n'est pas autorisé
