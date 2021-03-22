@@ -3,19 +3,86 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
+    
+    <div class='row'>
+        <div class='col-12'>
+            {% for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-12'>
+            <h1>Inscription</h1>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-12'>
+            {{ form_start(registrationForm, {'attr': {'onSubmit':'return valid_register()'} }) }}
+            <div class="mb-3">
+                {{ form_label(registrationForm.email, 'Votre email', {'label_attr': {'id': 'labelEmail'}}) }}
+                {{form_widget(registrationForm.email) }}
+            
+                <small>{{ form_help(registrationForm.email) }}</small>
+            
+                <div class="form-error">
+                    {{ form_errors(registrationForm.email) }}
+                </div>
+            </div>
 
-    <h1>Register</h1>
+            <div class="mb-3">
+                {{ form_label(registrationForm.pseudo, 'Votre Pseudo', {'label_attr': {'id': 'labelPseudo'}}) }}
+                {{form_widget(registrationForm.pseudo) }}
+            
+                <small>{{ form_help(registrationForm.pseudo) }}</small>
+            
+                <div class="form-error">
+                    {{ form_errors(registrationForm.pseudo) }}
+                </div>
+            </div>
+            <div class="mb-3">
+                {{ form_label(registrationForm.plainPassword, 'Votre mot de passe', {'label_attr': {'id': 'labelPassword'}}) }}
+                {{form_widget(registrationForm.plainPassword) }}
+            
+                <small>{{ form_help(registrationForm.plainPassword) }}</small>
+            
+                <div class="form-error">
+                    {{ form_errors(registrationForm.plainPassword) }}
+                </div>
+            </div>
+            <div class="mb-3 d-flex flex-row">
+                <div>
+                    {{ form_label(registrationForm.agreeTerms, 'CGU', {'label_attr': {'id': 'labelAgree'}}) }}
+                </div>
+                <div class="mb-1">
+                    {{form_widget(registrationForm.agreeTerms) }}
+                </div>
+                <small>{{ form_help(registrationForm.agreeTerms) }}</small>
+            
+                <div class="form-error">
+                    {{ form_errors(registrationForm.agreeTerms) }}
+                </div>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-secondary">Inscription</button>
+            </div>
+            {{ form_end(registrationForm) }}
+        </div>
+        <div class="col-12">
+            <div class="verif-password">
+                <ul>
+                    <li id="validPasswordC">Mot de passe entre 6 et 16 caractères</li>
+                    <li id="validPasswordUpper">Au moins une majuscule</li>
+                    <li id="validPasswordLower">Au moins une minuscule</li>
+                    <li id="validPasswordNumber">Au moins un chiffre</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    {% block js %}
+        {{parent()}}
+        <script src="{{asset('script/verif_register.js')}}"></script>
+    {% endblock %}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
-{% endblock %}
+    
