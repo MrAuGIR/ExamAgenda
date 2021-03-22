@@ -2,19 +2,34 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Repository\AgendaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/admin")
+ * IsGranted("ROLE_EDITEUR")
+ */
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin", name="admin_index")
+     * @Route("/", name="admin_index")
      */
-    public function index(): Response
+    public function index(AgendaRepository $agendaRepository): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if($this->isGranted('ROLE_ADMIN')){
+            $agendas = $agendaRepository->findAll();
+        }else{
+            $agendas = $agendaRepository->findBy(['user'=>$user]);
+        }
+
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
+            'agendas' => $agendas,
         ]);
     }
 }

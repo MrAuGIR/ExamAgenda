@@ -31,4 +31,18 @@ class AgendaController extends AbstractController
             'agenda' => $agenda,
         ]);
     }
+
+    /**
+     * @Route("/agenda/create", name="agenda_create")
+     * IsGranted("ROLE_EDITEUR")
+     */
+    public function create(Agenda $agenda): Response
+    {
+        
+
+        return $this->render('agenda/show.html.twig', [
+            'agenda' => $agenda,
+        ]);
+    }
+
 }

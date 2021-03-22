@@ -6,6 +6,21 @@
         <div class='col-12'>
             <h3>Commenaire pour l'événement {{agenda.titre}}</h3>
         </div>
+        <div class="col-12">
+            <a href="{{path('agenda_show', {slug: agenda.slug})}}" class="card-link">Retour à l'événement</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            {{form_start(form)}}
+            <div class="mb-3">
+                {{form_row(form.commentaire)}}
+            </div>
+            <div class="mb-3">
+                <input type="submit" class="btn btn-secondary" value="envoyer">
+            </div>
+            {{form_end(form)}}
+        </div>
     </div>
 
 {% endblock %}

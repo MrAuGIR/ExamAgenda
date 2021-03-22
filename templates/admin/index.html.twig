@@ -1,20 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Back Office{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class='row my-5'>
+        <div class='col-12'>
+            <h1>Bienvenue {{app.user.pseudo}} sur votre espace personnel</h1>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-12'>
+            <a href="{{path('agenda_create')}}" title="créer un évenement">Créer un événements</a>
+        </div>
+    </div>
+    <div class='row'>
+        {% set admin = (app.user.roles[0] == 'ROLE_ADMIN')? true : false %}
+        <div class='col-12'>
+            {% if admin %} Vous avez accès à tous les événements 
+            {% else %}
+            Vos événements
+            {% endif %}
+        </div>
+        {% for agenda in agendas %}
+            <div class="card-office">
+                <div class="card-office-picture">
+                    <div class="picture">
+                        <img src="{{asset('images/'~ agenda.image)}}">
+                    </div>
+                </div>
+                <div class="card-office-titre">
+                    <h5>{{agenda.titre}}</h5>
+                </div>
+                <div class="card-office-action">
+                    <a class="btn btn-secondary" href="{{path('agenda_edit',{slug : agenda.slug})}}">Editer</a>
+                    <a class="btn btn-secondary" href="{{path('agenda_delete',{slug : agenda.slug})}}">Supprimer</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/DevWeb/IsfacProjets/ExamAgenda/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/AdminController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/DevWeb/IsfacProjets/ExamAgenda/templates/admin/index.html.twig'|file_link(0) }}">templates/admin/index.html.twig</a></code></li>
-    </ul>
-</div>
 {% endblock %}

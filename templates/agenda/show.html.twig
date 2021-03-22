@@ -54,8 +54,8 @@
                             </h6>
                             <p class="card-text">{{comment.commentaire | raw}}</p>
                             {% if app.user == comment.user %}
-                                <a href="{{path('comment_edit', {id: comment.id})}}" class="card-link">modifier</a>
-                                <a href="{{path('comment_delete', {id: comment.id})}}" class="card-link">supprimer</a>
+                                <a href="{{path('agenda_comment_edit', {id: comment.id})}}" class="card-link">modifier</a>
+                                <a href="{{path('agenda_comment_delete', {id: comment.id})}}" class="card-link">supprimer</a>
                             {% endif %}
                             
                         </div>
