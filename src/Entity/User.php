@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -41,6 +43,22 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $pseudo;
+
+    /**
+     * @ORM\OneToMany(targetEntity=AgendaComment::class, mappedBy="user")
+     */
+    private $agendaComments;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Agenda::class, mappedBy="user")
+     */
+    private $agendas;
+
+    public function __construct()
+    {
+        $this->agendaComments = new ArrayCollection();
+        $this->agendas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -131,6 +149,66 @@ class User implements UserInterface
     public function setPseudo(?string $pseudo): self
     {
         $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AgendaComment[]
+     */
+    public function getAgendaComments(): Collection
+    {
+        return $this->agendaComments;
+    }
+
+    public function addAgendaComment(AgendaComment $agendaComment): self
+    {
+        if (!$this->agendaComments->contains($agendaComment)) {
+            $this->agendaComments[] = $agendaComment;
+            $agendaComment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAgendaComment(AgendaComment $agendaComment): self
+    {
+        if ($this->agendaComments->removeElement($agendaComment)) {
+            // set the owning side to null (unless already changed)
+            if ($agendaComment->getUser() === $this) {
+                $agendaComment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Agenda[]
+     */
+    public function getAgendas(): Collection
+    {
+        return $this->agendas;
+    }
+
+    public function addAgenda(Agenda $agenda): self
+    {
+        if (!$this->agendas->contains($agenda)) {
+            $this->agendas[] = $agenda;
+            $agenda->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAgenda(Agenda $agenda): self
+    {
+        if ($this->agendas->removeElement($agenda)) {
+            // set the owning side to null (unless already changed)
+            if ($agenda->getUser() === $this) {
+                $agenda->setUser(null);
+            }
+        }
 
         return $this;
     }
