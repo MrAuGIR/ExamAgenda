@@ -126,10 +126,10 @@ function styleLabel(id,error=false){
 
 //listener sur le click sur la balise span
 
-// let eye = document.getElementById('eye');
-// eye.addEventListener('click',function (e){
-//     visible('registration_form_plainPassword_first');
-// })
+let eye = document.getElementById('eye');
+eye.addEventListener('click',function (e){
+    visible('registration_form_plainPassword_first');
+})
 
 // let eye2 = document.getElementById('eye2');
 // eye2.addEventListener('click',function (e){

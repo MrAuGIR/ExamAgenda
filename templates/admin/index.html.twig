@@ -9,8 +9,8 @@
         </div>
     </div>
     <div class='row'>
-        <div class='col-12'>
-            <a href="{{path('agenda_create')}}" title="créer un évenement">Créer un événements</a>
+        <div class='col-12 d-flex justify-content-center'>
+            <a class="btn btn-primary" href="{{path('agenda_create')}}" title="créer un évenement">Créer un événements</a>
         </div>
     </div>
     <div class='row'>
@@ -22,6 +22,7 @@
             {% endif %}
         </div>
         <div class="col-12 col-lg-9">
+        {% if agendas %}
         {% for agenda in agendas %}
             <div class="card-office">
                 <div class="card-office-picture">
@@ -31,15 +32,21 @@
                 </div>
                 <div class="card-office-titre">
                     <h5>{{agenda.titre}}</h5>
+                    <p>{{agenda.description | striptags|slice(0, 50) ~'...' }}</p>
+                    <span class="card-office-date">le {{agenda.date | date('d-m-Y')}} à {{agenda.date | date('H:i')}}</span>
                 </div>
                 <div class="card-office-action">
+                    <a class="btn btn-secondary" href="{{path('agenda_show',{slug : agenda.slug})}}">Voir</a>
                     <a class="btn btn-secondary" href="{{path('agenda_edit',{id : agenda.id})}}">Editer</a>
                     <a class="btn btn-secondary" href="{{path('agenda_delete',{id : agenda.id})}}">Supprimer</a>
                 </div>
             </div>
         {% endfor %}
+        {% else %}
+            <h3>Vous n'avez pas encore d'événements</h3>
+        {% endif %}
         </div>
-        <div class="col-12 col-lg-3">
+        <div class="col-12 col-lg-3 border-start">
             <h3>Modifier mon mot de passe</h3>
             <a class="btn btn-primary" href="{{path('user_pass')}}">Modifier</a>
         </div>

@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
-
+{% block title %}Inscription{% endblock %}
+{% block stylesheets %}
+{{parent()}}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+{% endblock %}
 {% block body %}
     
     <div class='row'>
@@ -18,7 +22,7 @@
     </div>
     <div class='row'>
         <div class='col-12'>
-            {{ form_start(registrationForm, {'attr': {'onSubmit':'return valid_register()'} }) }}
+            {{ form_start(registrationForm, {'attr': {'onsubmit':'return valid_register()'} }) }}
             <div class="mb-3">
                 {{ form_label(registrationForm.email, 'Votre email', {'label_attr': {'id': 'labelEmail'}}) }}
                 {{form_widget(registrationForm.email) }}
@@ -49,8 +53,11 @@
                 <div class="form-error">
                     {{ form_errors(registrationForm.plainPassword) }}
                 </div>
+                <span id="eye">
+                    <i class="fas fa-eye"></i>
+                </span>
             </div>
-            <div class="mb-3 d-flex flex-row">
+            <div class="mb-3 d-flex justify-content-between">
                 <div>
                     {{ form_label(registrationForm.agreeTerms, 'CGU', {'label_attr': {'id': 'labelAgree'}}) }}
                 </div>

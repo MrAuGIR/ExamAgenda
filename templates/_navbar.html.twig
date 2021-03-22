@@ -23,6 +23,11 @@
                     </li>
                 {% endif %}
             </ul>
+            <div class="w-50 d-flex justify-content-end">
+                {% if app.user %}
+                    <span class="pseudo-user">Bonjour :{{app.user.pseudo}}</span>
+                {% endif %}
+            </div>
         </div>
     </div>
 </nav>

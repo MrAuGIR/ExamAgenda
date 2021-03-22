@@ -36,7 +36,7 @@ class RegistrationFormType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez saisir un email valide'
+                        'message' => 'Veuillez saisir un pseudo valide'
                     ])
                 ]
             ])

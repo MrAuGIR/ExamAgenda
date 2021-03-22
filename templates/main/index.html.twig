@@ -11,13 +11,22 @@
     <div class="row my-5">
         {% for agenda in agendas %}
         <div class="col-12 col-md-6 col-lg-4 my-1">
-            <div class="card">
+            <div class="card" >
+                <div class="picture">
+                    <img class="card-index-img" src="{{asset('images/'~ agenda.image)}}" class="card-img-top" alt="logo de l'event">
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">{{agenda.titre}}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">le {{agenda.date | date('d-m-Y')}} à {{agenda.date | date('H:i')}}</h6>
                     <p class="card-text">{{agenda.description | striptags|slice(0, 50) ~'...' }}</p>
-                    <span>({{ agenda.agendaComments| length}} commentaire)</span>
-                    <a href="{{path('agenda_show', {slug: agenda.slug})}}" class="card-link">Détaille</a>
+                    <div class="card-main-bottom">
+                        <div class="col-12 col-md-6">
+                            <span class="card-comment">({{ agenda.agendaComments| length}} commentaire)</span>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <a class="btn btn-secondary" href="{{path('agenda_show', {slug: agenda.slug})}}" class="card-link">Détaille</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

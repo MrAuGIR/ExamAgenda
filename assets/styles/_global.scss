@@ -9,8 +9,104 @@ body{
     width: 100%;
 }
 
+.pseudo-user{
+    font-weight: bold;
+}
+
 .picture img{
-    object-fit: contain;
+    object-fit: cover;
     height: 100%;
     width: 100%;
+}
+
+/* card page main */
+.card-main-bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card-comment{
+    font-size: small;
+    font-weight: bold;
+}
+
+/* card page backoffice */
+.card-office{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    background-color: beige;
+
+    margin-top : 0.8rem;
+    margin-bottom: 0.8rem;
+
+    .card-office-picture{
+        display: flex;
+        flex-direction: column;
+        width: 33%;
+        height: 100%;
+    }
+
+    .card-office-titre{
+        display: flex;
+        flex-direction: column;
+        width: 33%;
+        height: 100%;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .card-office-date{
+        font-weight: bold;
+        font-size: small;
+    }
+
+    .card-office-action{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+
+}
+
+/*mise en form pour l'agenda */
+.header-agenda{
+    background-color: #585478;
+    color: #F2EFEA;
+
+}
+
+.info-agenda{
+    justify-content: space-around;
+    align-items: center;
+    background-color: #F2EFEA;
+
+    h4{
+        font-weight: bold;
+        font-size: medium;
+        margin:0;
+    }
+    
+}
+
+/* mise en form commentaire */
+.head-comment{
+
+
+    background-color: #F2EFEA;
+    color: #585478;
+
+    .btn-comment{
+        text-decoration: none;
+        padding: 0.5rem;
+        background-color: #66D7D1;
+        color:#F2EFEA;
+    }
+
+    .btn-comment:hover{
+        background-color: #585478;
+    }
 }
