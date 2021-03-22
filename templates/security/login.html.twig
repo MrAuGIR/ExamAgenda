@@ -3,7 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
+<form method="post" onsubmit="return valid_login()">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -15,28 +15,30 @@
     {% endif %}
 
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
-
+    <div class="mb-3 d-flex flex-column">
+        <label for="inputEmail" id="labelEmail">Email</label>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autofocus>
+    </div>
+    <div class="mb-3">
+        <label for="inputPassword" id="labelPassword">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" >
+        <span id="eye">
+            <i class="fas fa-eye"></i>
+        </span>
+    </div>
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
+    <div class="mb-3">
+        <button class="btn btn-lg btn-primary" type="submit">
+            Sign in
+        </button>
+    </div>
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
+    
 </form>
+{% endblock %}
+{% block js %}
+{{parent()}}
+<script src="{{asset('script/verif_login.js')}}"></script>
 {% endblock %}

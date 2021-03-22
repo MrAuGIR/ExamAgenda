@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+    <div class='row'>
+        <div class='col-12'>
+            <h1>{{agenda.titre}}</h1>
+        </div>
+    </div>
+    <div class='row'>
+        <div class="col-12 col-md-6">
+            <h4>Auteur : {{agenda.user.pseudo}}</h4>
+        </div>
+        <div class="col-12 col-md-6">
+            <h4>Date : le {{agenda.date | date('d-m-Y')}} à {{agenda.date | date('H:i')}}</h4>
+        </div>
+        <div class='col-12 col-lg-8'>
+            {{agenda.description}}
+        </div>
+        <div class="col-12 col-lg-4">
+            <div class="picture">
+                <img src="{{asset('images/'~ agenda.image)}}">
+            </div>
+        </div>
+    </div>
+    {% if app.user == agenda.user %}
+    <div class='row my-2'>
+        <div class='col-12 col-md-6'>
+            C'est un de vos événements, vous pouvez l'éditer
+        </div>
+        <div class="col-12 col-md-6">
+            <a href="{{path('agenda_edit',{slug:agenda.slug})}}" title="editer l'agenda">Editer</a>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

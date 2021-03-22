@@ -4,3 +4,13 @@ body{
     font-family: 'Raleway', sans-serif;
 }
 
+.picture{
+    height: 150px;
+    width: 100%;
+}
+
+.picture img{
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+}

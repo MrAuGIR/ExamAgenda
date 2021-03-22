@@ -19,6 +19,22 @@ class AgendaRepository extends ServiceEntityRepository
         parent::__construct($registry, Agenda::class);
     }
 
+
+    /**
+     * @return Agenda[] Returns an array of Agenda objects
+     */
+    public function findFuturAgenda($order = 'ASC')
+    {
+        $date = new \DateTime('now');
+
+        $query= $this->createQueryBuilder('a')
+            ->where('a.date >= :val')
+            ->setParameter('val', $date)
+            ->orderBy('a.date', $order)
+            ;
+        return $query->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Agenda[] Returns an array of Agenda objects
     //  */
