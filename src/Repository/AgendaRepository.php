@@ -25,10 +25,10 @@ class AgendaRepository extends ServiceEntityRepository
      */
     public function findFuturAgenda($order = 'ASC')
     {
-        $date = new \DateTime('now');
+        $date = new \DateTime();
 
         $query= $this->createQueryBuilder('a')
-            ->where('a.date >= :val')
+            ->where('a.date > :val')
             ->setParameter('val', $date)
             ->orderBy('a.date', $order)
             ;

@@ -40,7 +40,7 @@ class Agenda
     private $image;
 
     /**
-     * @ORM\OneToMany(targetEntity=AgendaComment::class, mappedBy="agenda")
+     * @ORM\OneToMany(targetEntity=AgendaComment::class, mappedBy="agenda", cascade={"remove"})
      */
     private $agendaComments;
 
